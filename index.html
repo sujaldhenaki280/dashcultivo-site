@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dash Cultivate</title>
+<meta name="description" content="Sujal Dhanaki sets up your inbox so every new inquiry gets a reply within 5 minutes, with your pricing and tour link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: white page, 1120px frame. Hero = copy | live-looking inbox; then proof stat, features grid, 4-step track, about, FAQ, one dark CTA panel. */
+:root {
+  color-scheme: light;
+  --bg: #FFFFFF;
+  --soft: #F6F8F7;
+  --line: #E4E8E6;
+  --line-strong: #D3D9D6;
+  --ink: #0D1110;
+  --body: #3A413E;
+  --muted: #6A736F;
+  --accent: #157A5B;
+  --accent-soft: #E7F3EE;
+  --on-dark: #FFFFFF;
+  --on-dark-muted: #A9B3AF;
+  --sans: "Geist", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --mono: "Geist Mono", ui-monospace, Consolas, monospace;
+  --r: 18px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--body); font: 400 17px/1.6 var(--sans); margin: 0; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 24px; }
+h1, h2, h3 { color: var(--ink); margin: 0; text-wrap: balance; font-weight: 600; letter-spacing: -0.025em; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -0.01em; }
+.label { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: .02em; }
+.label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; font: 500 15px var(--sans); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease, border-color .15s ease; white-space: nowrap; }
+.btn svg { width: 16px; height: 16px; transition: transform .15s ease; }
+.btn:hover svg { transform: translateX(2px); }
+.btn-dark { background: var(--ink); color: var(--on-dark); }
+.btn-dark:hover { background: #26302C; }
+.btn-line { background: var(--bg); color: var(--ink); border-color: var(--line-strong); }
+.btn-line:hover { border-color: var(--ink); }
+.btn-light { background: var(--on-dark); color: var(--ink); }
+.btn-light:hover { background: var(--accent-soft); }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(255, 255, 255, .86); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.top.scrolled { border-bottom-color: var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 17px; letter-spacing: -0.02em; }
+.nav { display: flex; align-items: center; gap: 30px; font-size: 15px; }
+.nav a { text-decoration: none; color: var(--body); }
+.nav a:hover { color: var(--ink); }
+.nav .btn { height: 40px; padding: 0 18px; font-size: 14px; color: var(--on-dark); }
+
+/* hero */
+.hero { position: relative; padding-block: 72px 96px; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 100%; background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(ellipse 60% 70% at 78% 40%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse 60% 70% at 78% 40%, #000 0%, transparent 70%); pointer-events: none; }
+.hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 64px; align-items: center; }
+.hero h1 { font-size: clamp(42px, 6vw, 70px); line-height: 1.02; letter-spacing: -0.04em; margin-block: 18px 22px; }
+.hero h1 .serif { font-size: 1.08em; color: var(--accent); }
+.lede { font-size: 19px; line-height: 1.55; max-width: 31em; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.checks { list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14.5px; color: var(--body); }
+.checks li { display: inline-flex; align-items: center; gap: 8px; }
+.checks svg { width: 16px; height: 16px; color: var(--accent); flex: none; }
+
+/* inbox mockup */
+.mock-wrap { position: relative; }
+.mock { background: var(--bg); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 1px 2px rgba(13, 17, 16, .04), 0 24px 60px -24px rgba(13, 17, 16, .22); overflow: hidden; }
+.mock-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13.5px; font-weight: 500; color: var(--ink); }
+.mock-head .ex { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; }
+.mail { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+.mail.active { background: var(--soft); }
+.avatar { grid-row: span 2; width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+.mail .subj { font-size: 14px; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mail .time { font: 400 12.5px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--accent); }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.mail .snip { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.reply { padding: 18px 18px 46px; display: grid; gap: 10px; }
+.reply-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--muted); }
+.reply-meta b { color: var(--ink); font-weight: 500; }
+.reply-meta .time { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.reply p { font-size: 14.5px; line-height: 1.6; color: var(--body); }
+.toast { position: absolute; left: -28px; bottom: -26px; display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; box-shadow: 0 16px 40px -18px rgba(13, 17, 16, .3); font-size: 13.5px; }
+.toast .tick { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--on-dark); display: grid; place-items: center; flex: none; }
+.toast .tick svg { width: 15px; height: 15px; }
+.toast b { display: block; color: var(--ink); font-weight: 600; }
+.toast span { color: var(--muted); font-size: 12.5px; }
+
+/* sections */
+.section { padding-block: 104px; }
+.section.tinted { background: var(--soft); border-block: 1px solid var(--line); }
+.head { max-width: 640px; }
+.head h2 { font-size: clamp(32px, 4.2vw, 48px); line-height: 1.08; letter-spacing: -0.035em; margin-block: 14px 16px; }
+.head h2 .serif { color: var(--accent); font-size: 1.06em; }
+.head p { font-size: 18px; color: var(--body); }
+
+/* proof stat */
+.stat { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 56px; align-items: center; }
+.stat .big { font-family: var(--serif); font-size: clamp(110px, 16vw, 190px); line-height: .85; color: var(--ink); letter-spacing: -0.03em; }
+.stat .big small { font-size: .5em; color: var(--accent); margin-left: 2px; }
+.stat blockquote { margin: 14px 0 0; font-size: clamp(21px, 2.4vw, 27px); line-height: 1.35; color: var(--ink); letter-spacing: -0.015em; max-width: 30em; }
+.stat cite { display: block; margin-top: 16px; font-style: normal; font-size: 14px; color: var(--muted); }
+.stat cite a { text-underline-offset: 3px; }
+.stat .then { margin-top: 18px; font-size: 17px; color: var(--body); max-width: 34em; }
+
+/* features */
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 52px; }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 26px 24px 28px; display: grid; gap: 12px; align-content: start; transition: border-color .2s, transform .2s; }
+.card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.icon { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 6px; }
+.icon svg { width: 20px; height: 20px; }
+.card h3 { font-size: 18px; letter-spacing: -0.02em; }
+.card p { font-size: 15px; line-height: 1.55; color: var(--body); }
+
+/* steps */
+.steps { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; position: relative; }
+.steps li:not(:last-child)::after { content: ""; position: absolute; top: 19px; left: 52px; right: -16px; height: 1px; background: var(--line-strong); }
+.steps li { position: relative; display: grid; gap: 10px; align-content: start; }
+.num { width: 40px; height: 40px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line-strong); color: var(--ink); display: grid; place-items: center; font: 500 14px var(--mono); margin-bottom: 8px; }
+.steps li:last-child .num { background: var(--accent); border-color: var(--accent); color: var(--on-dark); }
+.steps h3 { font-size: 18px; letter-spacing: -0.02em; }
+.steps p { font-size: 15px; color: var(--body); }
+
+/* about */
+#about { padding-bottom: 72px; }
+#faq { padding-top: 72px; border-top: 1px solid var(--line); }
+.about { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 72px; align-items: center; }
+.photo { position: relative; aspect-ratio: 4 / 5; width: 100%; max-width: 400px; border-radius: 24px; overflow: hidden; background: var(--soft); border: 1px solid var(--line); display: grid; place-items: center; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .initials { font-family: var(--serif); font-size: 84px; color: var(--accent); }
+.photo .badge { position: absolute; left: 14px; bottom: 14px; background: rgba(255, 255, 255, .94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 12px; padding: 9px 13px; font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.photo .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.about .head h2 { margin-bottom: 20px; }
+.about-copy p + p { margin-top: 14px; }
+.about-copy { font-size: 17.5px; }
+.facts { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.facts li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+.facts li span:first-child { color: var(--muted); }
+.facts li span:last-child { color: var(--ink); }
+.verify { margin-top: 26px; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 14px; background: var(--accent-soft); color: var(--ink); font-size: 15.5px; }
+.verify svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 2px; }
+.verify b { font-weight: 600; }
+
+/* reviews */
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 48px; }
+.review { margin: 0; padding: 28px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); display: grid; gap: 20px; align-content: space-between; }
+.review blockquote { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink); letter-spacing: -0.01em; }
+.review figcaption { font-size: 14px; color: var(--muted); }
+.review figcaption b { display: block; color: var(--ink); font-weight: 600; }
+
+/* faq */
+.faq-grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 72px; align-items: start; }
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-block: 22px; font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.015em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .pm { position: relative; width: 14px; height: 14px; flex: none; }
+.faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 0; top: 6px; width: 14px; height: 2px; border-radius: 2px; background: var(--muted); transition: transform .2s; }
+.faq summary .pm::after { transform: rotate(90deg); }
+.faq details[open] .pm::after { transform: rotate(0deg); }
+.faq details p { padding-bottom: 22px; max-width: 38em; color: var(--body); font-size: 16px; }
+
+/* cta */
+.cta-section { padding-block: 24px 96px; }
+.cta { background: var(--ink); color: var(--on-dark); border-radius: 28px; padding: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 48px; align-items: end; position: relative; overflow: hidden; }
+.cta::after { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(21, 122, 91, .45), transparent 65%); pointer-events: none; }
+.cta > * { position: relative; z-index: 1; min-width: 0; }
+.cta h2 { color: var(--on-dark); font-size: clamp(32px, 4.4vw, 52px); line-height: 1.05; letter-spacing: -0.035em; }
+.cta h2 .serif { color: #8FD9BE; }
+.cta p { color: var(--on-dark-muted); font-size: 18px; margin-top: 18px; max-width: 30em; }
+.cta-actions { display: grid; gap: 12px; justify-items: start; }
+.email-chip { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .22); color: var(--on-dark); font: 400 15px var(--sans); overflow-wrap: anywhere; }
+.email-chip.mono { font-family: var(--mono); user-select: all; }
+.copy { background: transparent; border: 0; color: var(--on-dark-muted); font: 500 14px var(--sans); cursor: pointer; padding: 4px 2px; text-decoration: underline; text-underline-offset: 3px; }
+.copy:hover { color: var(--on-dark); }
+.copy-note { font-size: 13px; color: #8FD9BE; min-height: 1.2em; }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; padding-block: 28px; font-size: 14px; color: var(--muted); }
+footer nav { display: flex; gap: 22px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--ink); }
+
+/* load-in: content is visible at rest; motion only adds a short rise */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+  .d1 { animation-delay: .06s; } .d2 { animation-delay: .14s; } .d3 { animation-delay: .22s; } .d4 { animation-delay: .4s; }
+  @keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
+  .toast { animation: pop .6s 1s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes pop { from { transform: translateY(8px) scale(.98); } to { transform: none; } }
+}
+
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+  .hero { padding-block: 48px 80px; }
+  .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+  .steps li::after { display: none; }
+  .about { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .photo { max-width: 360px; }
+  .faq-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .cta { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .stat { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .toast { left: 12px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding-inline: 18px; }
+  .nav a:not(.btn) { display: none; }
+  .section { padding-block: 72px; }
+  .grid4, .steps { grid-template-columns: minmax(0, 1fr); }
+  .facts li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .mail .snip { display: none; }
+  .lede { font-size: 17.5px; }
+  .cta-section { padding-block: 8px 64px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top-bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Dash Cultivate, back to top">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0D1110"/><rect x="7" y="13" width="10" height="2.6" rx="1.3" fill="#FFFFFF"/><circle cx="20.5" cy="14.3" r="2.3" fill="#3DBA8E"/></svg>
+      Dash Cultivate
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-dark" href="#contact" data-book>Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <span class="label rise">For wedding venues and property managers</span>
+        <h1 id="h1" class="rise d1">Every new inquiry, answered in <span class="serif">under 5 minutes.</span></h1>
+        <p class="lede rise d2">I set up your inbox to reply to new inquiries for you, with your real pricing and your tour link. A Saturday night email gets the same fast answer as a Tuesday morning one.</p>
+        <div class="actions rise d3">
+          <a class="btn btn-dark" href="#contact" data-book>Book a call
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a class="btn btn-line" href="#how">See how it works</a>
+        </div>
+        <ul class="checks rise d3">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Sends from your own address</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>You approve every reply first</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Urgent emails go straight to you</li>
+        </ul>
+      </div>
+
+      <div class="mock-wrap rise d2" role="figure" aria-label="Example inbox: three weekend inquiries, each answered within a few minutes">
+        <div class="mock">
+          <div class="mock-head"><span>Inbox</span><span class="ex">Example</span></div>
+          <div class="mail active">
+            <span class="avatar">W</span>
+            <span class="subj">Is June 13 open for 120 guests?</span>
+            <span class="time">Sat 9:47 PM</span>
+            <span class="snip">Wedding · price and tour</span>
+            <span class="pill">Replied in 4 min</span>
+          </div>
+          <div class="mail">
+            <span class="avatar">R</span>
+            <span class="subj">Rehearsal dinner for 40, pricing?</span>
+            <span class="time">Sun 7:12 AM</span>
+            <span class="snip">Private event · Friday night</span>
+            <span class="pill">Replied in 3 min</span>
+          </div>
+          <div class="mail">
+            <span class="avatar">T</span>
+            <span class="subj">Can we tour next Thursday?</span>
+            <span class="time">Fri 11:38 PM</span>
+            <span class="snip">Tour request</span>
+            <span class="pill">Replied in 2 min</span>
+          </div>
+          <div class="reply">
+            <div class="reply-meta"><b>Your reply · sent from your email</b><span class="time">Sat 9:51 PM</span></div>
+            <p>Thanks for reaching out! June 13 is still open. For 120 guests, Saturday rentals start at $6,500 and include tables, chairs, and the bridal suite. Here's a link to pick a tour time this week.</p>
+          </div>
+        </div>
+        <div class="toast" aria-hidden="true">
+          <span class="tick"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8.5l3 3 7-7"/></svg></span>
+          <div><b>Reply sent at 9:51 PM</b><span>while you were off for the night</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" aria-label="Why speed matters">
+    <div class="wrap">
+      <div class="stat">
+        <div class="big" aria-hidden="true">7<small>&times;</small></div>
+        <div>
+          <span class="label">Why speed matters</span>
+          <blockquote>Companies that responded to a new lead within an hour were nearly seven times as likely to qualify it as those that waited even one hour longer.</blockquote>
+          <cite>Harvard Business Review, "The Short Life of Online Sales Leads" (2011). <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank" rel="noopener">Read the study</a></cite>
+          <p class="then">Couples and renters email a few places at once. When you're running an event or done for the day, their message waits, and the first good reply usually gets the tour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="what-h">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">What it does</span>
+        <h2 id="what-h">Your inbox answers <span class="serif">while you work.</span></h2>
+        <p>No chatbot on your website and no new app to learn. It works inside the email you already use.</p>
+      </div>
+      <div class="grid4">
+        <div class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h4l2 3h4l2-3h4"/><path d="M5.5 5h13L21 13v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5z"/></svg></span>
+          <h3>Reads every inquiry</h3>
+          <p>New emails get checked as they arrive, day or night, weekends included.</p>
+        </div>
+        <div class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></span>
+          <h3>Replies in minutes</h3>
+          <p>Each reply answers their question with your pricing for the date or service they asked about.</p>
+        </div>
+        <div class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+          <h3>Books the tour</h3>
+          <p>Every reply includes your tour or showing link, so interested people pick a time right away.</p>
+        </div>
+        <div class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <h3>Flags what's urgent</h3>
+          <p>A problem on event day or a leak at a rental gets forwarded to your personal email right away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">How setup works</span>
+        <h2 id="how-h">Nothing goes live <span class="serif">until you say so.</span></h2>
+        <p>Setup takes one short call from you. I handle the rest.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="num">1</span><h3>A short call</h3><p>I learn your pricing, packages, and how you like to answer people.</p></li>
+        <li><span class="num">2</span><h3>I write your replies</h3><p>I connect to your inbox and set up replies for the inquiries you get most.</p></li>
+        <li><span class="num">3</span><h3>You review them</h3><p>Read every reply and change any wording. Nothing sends until you okay it.</p></li>
+        <li><span class="num">4</span><h3>It goes live</h3><p>New inquiries get answered in minutes, and I check on it every day.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <div class="wrap about">
+      <div class="photo" id="photo"><span class="initials" aria-hidden="true">SD</span></div>
+      <div>
+        <div class="head">
+          <span class="label">Who you'll work with</span>
+          <h2 id="about-h">Hi, I'm <span class="serif">Sujal Dhanaki.</span></h2>
+        </div>
+        <div class="about-copy">
+          <p>I run Dash Cultivate on my own. When you email me, you're talking to me, and I'm the one who sets up and looks after your inbox.</p>
+          <p>I work with small, owner-run businesses where the owner is also the person answering inquiries. That's usually where replies are slowest, because you're busy doing the actual work.</p>
+        </div>
+        <ul class="facts">
+          <li><span>Works with</span><span>Wedding and event venues, property managers</span></li>
+          <li><span>Your part</span><span>One short call, then approving your replies</span></li>
+          <li><span>After launch</span><span>I check your setup every day</span></li>
+        </ul>
+        <div class="verify">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Got an email from me? It came from an <b>@dashcultivo.com</b> address, and this is my site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" id="reviews" aria-labelledby="reviews-h" hidden>
+    <div class="wrap">
+      <div class="head">
+        <span class="label">From clients</span>
+        <h2 id="reviews-h">What owners say</h2>
+      </div>
+      <div class="reviews" id="review-list"></div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-h">
+    <div class="wrap faq-grid">
+      <div class="head">
+        <span class="label">Questions</span>
+        <h2 id="faq-h">Good to <span class="serif">know.</span></h2>
+        <p>Anything else, ask me on a call or reply to my email.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Will it send something wrong to a client?<span class="pm"></span></summary><p>You read and approve the replies before anything goes live. If an inquiry doesn't fit one of your approved replies, it waits for you instead of getting a guess.</p></details>
+        <details><summary>Do I have to switch email or learn new software?<span class="pm"></span></summary><p>No. It works with the inbox you already use, and replies go out from your own address, in your voice.</p></details>
+        <details><summary>What happens with urgent emails?<span class="pm"></span></summary><p>Anything urgent gets forwarded straight to your personal email, so you see it right away even when you're away from the business inbox.</p></details>
+        <details><summary>How much of my time does setup take?<span class="pm"></span></summary><p>One short call to start, then a few minutes to read and approve your replies. I do the setup work.</p></details>
+        <details><summary>Who will I be working with?<span class="pm"></span></summary><p>Me, Sujal. There's no sales team or hand-off. The person you talk to is the person who builds and checks your setup.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2 id="contact-h">Want to see the reply I'd write <span class="serif">for your inbox?</span></h2>
+          <p>Book a call or reply to my email. I'll show you a reply built from your own pricing and links.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-light" id="book" href="#contact" data-book>Book a call
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <span class="email-chip" id="email-text">Or reply to the email I sent you</span>
+          <button class="copy" id="copy" type="button" hidden>Copy email address</button>
+          <span class="copy-note" id="copy-note" role="status"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="year">© 2026 Dash Cultivate · Sujal Dhanaki</span>
+    <nav aria-label="Footer"><a href="#how">How it works</a><a href="#about">About</a><a href="#faq">FAQ</a></nav>
+  </div>
+</footer>
+
+<script>
+// Fill these in. Anything left blank stays hidden or uses the fallback text.
+const CONFIG = {
+  email: "",          // the address you send from, e.g. "sujal@dashcultivate.com"
+  bookingUrl: "https://calendly.com/sujalpeak/30min",
+  photo: "sujal.jpg"  // keep your photo next to this file with this name
+};
+
+// Real reviews only, with the client's permission. One object per client:
+// { quote: "...", name: "First Last", business: "Venue name", city: "City, ST" }
+// The reviews section stays hidden until this list has at least one entry.
+const REVIEWS = [];
+
+(function () {
+  const $ = (id) => document.getElementById(id);
+  if (CONFIG.bookingUrl) {
+    document.querySelectorAll("[data-book]").forEach((a) => { a.href = CONFIG.bookingUrl; a.target = "_blank"; a.rel = "noopener"; });
+  }
+  if (CONFIG.email) {
+    $("email-text").textContent = CONFIG.email;
+    $("email-text").classList.add("mono");
+    $("copy").hidden = false;
+    $("copy").addEventListener("click", () => {
+      const fallback = () => { const r = document.createRange(); r.selectNodeContents($("email-text")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("copy-note").textContent = "Selected. Press Ctrl+C to copy."; };
+      try { navigator.clipboard.writeText(CONFIG.email).then(() => { $("copy-note").textContent = "Copied"; }, fallback); } catch (e) { fallback(); }
+    });
+  }
+  if (CONFIG.photo) {
+    const img = new Image();
+    img.alt = "Sujal Dhanaki, smiling, on a mountain road";
+    img.onload = () => {
+      const badge = document.createElement("span"); badge.className = "badge"; badge.textContent = "Sujal Dhanaki, founder";
+      $("photo").replaceChildren(img, badge);
+    };
+    img.src = CONFIG.photo;
+  }
+  if (REVIEWS.length) {
+    $("review-list").replaceChildren(...REVIEWS.map((r) => {
+      const f = document.createElement("figure"); f.className = "review";
+      const q = document.createElement("blockquote"); q.textContent = "“" + r.quote + "”";
+      const c = document.createElement("figcaption");
+      const b = document.createElement("b"); b.textContent = r.name;
+      c.append(b, [r.business, r.city].filter(Boolean).join(", "));
+      f.append(q, c); return f;
+    }));
+    $("reviews").hidden = false;
+  }
+  $("year").textContent = "© " + new Date().getFullYear() + " Dash Cultivate · Sujal Dhanaki";
+  const bar = $("top-bar");
+  const onScroll = () => bar.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+})();
+</script>
+</body>
+</html>
